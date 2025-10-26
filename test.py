@@ -1,3 +1,7 @@
+No problem! Let me fix the Plotly dependency issue by creating visualizations using Streamlit's built-in components and HTML/CSS. Here's the updated code without Plotly:
+
+**aws_vulnerability_app.py**
+```python
 import streamlit as st
 import boto3
 import json
