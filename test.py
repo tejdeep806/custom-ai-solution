@@ -28,12 +28,94 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS - Dark theme with better contrast
+# Fixed CSS - Light theme with proper contrast
 st.markdown("""
 <style>
+    /* Force light theme throughout the app */
+    .stApp {
+        background-color: #f8f9fa !important;
+    }
+    
+    .main .block-container {
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+    
+    /* Fix all text colors */
+    .stMarkdown, .stText, .stTitle, .stHeader, 
+    [data-testid="stMarkdownContainer"], .css-1lcbmhc, .css-1d391kg,
+    p, div, span, h1, h2, h3, h4, h5, h6 {
+        color: #1a1a1a !important;
+    }
+    
+    /* Fix tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2px;
+        background-color: #f1f3f4;
+        padding: 4px;
+        border-radius: 8px;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        white-space: pre-wrap;
+        background-color: #f1f3f4;
+        border-radius: 6px 6px 0px 0px;
+        gap: 1px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: #495057 !important;
+        font-weight: 600;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* Button styling */
+    .stButton button {
+        background-color: #4f46e5 !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 6px !important;
+        font-weight: 600 !important;
+    }
+    
+    .stButton button:hover {
+        background-color: #4338ca !important;
+        color: white !important;
+    }
+    
+    /* Select box and input fields */
+    .stSelectbox, .stMultiselect, .stTextInput {
+        color: #1a1a1a !important;
+    }
+    
+    .stSelectbox div, .stMultiselect div {
+        color: #1a1a1a !important;
+    }
+    
+    /* Fix for metric cards */
+    [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
+        color: #1a1a1a !important;
+    }
+    
+    /* Sidebar fixes */
+    .css-1d391kg, .css-1lcbmhc {
+        background-color: #f8f9fa !important;
+    }
+    
+    .css-1d391kg p, .css-1lcbmhc p {
+        color: #1a1a1a !important;
+    }
+
+    /* Main header styling */
     .main-header {
         font-size: 2.8rem;
-        color: #FF4B4B;
+        color: #1a1a1a !important;
         text-align: center;
         margin-bottom: 1rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -41,43 +123,48 @@ st.markdown("""
         -webkit-text-fill-color: transparent;
         font-weight: 800;
     }
+    
     .sub-header {
         font-size: 1.4rem;
-        color: #b0b0b0;
+        color: #495057 !important;
         text-align: center;
         margin-bottom: 2rem;
         font-weight: 300;
     }
+    
     .severity-critical { 
         background: linear-gradient(135deg, #dc3545, #c82333); 
-        color: white; 
+        color: white !important; 
         padding: 6px 12px; 
         border-radius: 20px; 
         font-weight: bold;
         font-size: 0.9rem;
         box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
     }
+    
     .severity-high { 
         background: linear-gradient(135deg, #fd7e14, #e86209); 
-        color: white; 
+        color: white !important; 
         padding: 6px 12px; 
         border-radius: 20px; 
         font-weight: bold;
         font-size: 0.9rem;
         box-shadow: 0 2px 4px rgba(253, 126, 20, 0.3);
     }
+    
     .severity-medium { 
         background: linear-gradient(135deg, #ffc107, #e0a800); 
-        color: #000; 
+        color: #000 !important; 
         padding: 6px 12px; 
         border-radius: 20px; 
         font-weight: bold;
         font-size: 0.9rem;
         box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
     }
+    
     .severity-low { 
         background: linear-gradient(135deg, #28a745, #218838); 
-        color: white; 
+        color: white !important; 
         padding: 6px 12px; 
         border-radius: 20px; 
         font-weight: bold;
@@ -86,77 +173,85 @@ st.markdown("""
     }
     
     .metric-card {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-        color: white;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        color: #1a1a1a !important;
         padding: 25px;
         border-radius: 15px;
         text-align: center;
         margin: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         transition: transform 0.3s ease;
-        border: 1px solid #4a5568;
+        border: 1px solid #dee2e6;
     }
+    
     .metric-card:hover {
         transform: translateY(-5px);
     }
+    
     .metric-value {
         font-size: 2.5rem;
         font-weight: 800;
         margin: 10px 0;
+        color: #1a1a1a !important;
     }
+    
     .metric-label {
         font-size: 1rem;
         opacity: 0.9;
+        color: #495057 !important;
     }
     
     .service-card {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-        color: white;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        color: #1a1a1a !important;
         padding: 20px;
         border-radius: 15px;
         text-align: center;
         margin: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
-        border: 1px solid #4a5568;
+        border: 1px solid #dee2e6;
     }
+    
     .service-card:hover {
         transform: translateY(-3px);
         border-color: #667eea;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     
     .vulnerability-card {
-        background: #2d3748;
+        background: #ffffff !important;
         border-radius: 12px;
         padding: 20px;
         margin: 15px 0;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         border-left: 5px solid;
         transition: all 0.3s ease;
-        color: #e2e8f0;
-        border: 1px solid #4a5568;
+        color: #1a1a1a !important;
+        border: 1px solid #dee2e6;
     }
+    
     .vulnerability-card:hover {
         transform: translateX(5px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
     
     .tool-card {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-        color: white;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        color: #1a1a1a !important;
         padding: 15px;
         border-radius: 10px;
         margin: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
-        border: 1px solid #4a5568;
+        border: 1px solid #dee2e6;
         text-align: center;
     }
+    
     .tool-card:hover {
         transform: translateY(-3px);
         border-color: #667eea;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     
     .tool-indicator {
@@ -166,82 +261,82 @@ st.markdown("""
         border-radius: 50%;
         margin-right: 8px;
     }
+    
     .tool-live {
         background-color: #38a169;
     }
+    
     .tool-demo {
         background-color: #d69e2e;
     }
+    
     .tool-offline {
         background-color: #e53e3e;
     }
 
     .remediation-step {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         padding: 20px;
         margin: 15px 0;
         border-radius: 10px;
         border-left: 4px solid #28a745;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        color: #e2e8f0;
-        border: 1px solid #4a5568;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        color: #1a1a1a !important;
+        border: 1px solid #dee2e6;
     }
     
     .risk-assessment {
-        background: linear-gradient(135deg, #553c0a 0%, #744210 100%);
+        background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
         padding: 20px;
         border-radius: 10px;
         margin: 15px 0;
         border-left: 4px solid #d69e2e;
-        color: #e2e8f0;
-        border: 1px solid #744210;
+        color: #856404 !important;
+        border: 1px solid #ffeaa7;
     }
     
     .ai-insight {
-        background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+        background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
         padding: 20px;
         border-radius: 10px;
         margin: 15px 0;
-        border-left: 4px solid #3182ce;
-        color: #e2e8f0;
-        border: 1px solid #2b6cb0;
+        border-left: 4px solid #17a2b8;
+        color: #0c5460 !important;
+        border: 1px solid #bee5eb;
     }
     
     .security-tip {
-        background: linear-gradient(135deg, #22543d 0%, #276749 100%);
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
         padding: 20px;
         border-radius: 10px;
         margin: 15px 0;
-        border-left: 4px solid #38a169;
-        color: #e2e8f0;
-        border: 1px solid #276749;
+        border-left: 4px solid #28a745;
+        color: #155724 !important;
+        border: 1px solid #c3e6cb;
     }
 
-    /* Dark Theme Base Styles */
-    .stApp {
-        background-color: #1a202c;
-    }
-    
-    .main .block-container {
-        background-color: #1a202c;
-        color: #e2e8f0;
-    }
-    
-    .stMarkdown, .stText {
-        color: #e2e8f0;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-        color: #e2e8f0;
-    }
-    
+    /* Expander styling */
     .stExpander {
-        background-color: #2d3748;
-        border: 1px solid #4a5568;
+        background-color: #ffffff !important;
+        border: 1px solid #dee2e6 !important;
     }
     
     .stExpander label {
-        color: #e2e8f0;
+        color: #1a1a1a !important;
+    }
+
+    /* Specific fix for the main dashboard title */
+    .dashboard-title {
+        color: #1a1a1a !important;
+        font-size: 2.5rem !important;
+        font-weight: 700 !important;
+        text-align: center;
+        margin: 2rem 0;
+        padding: 1rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     /* Responsive Design */
@@ -250,14 +345,17 @@ st.markdown("""
             margin: 5px 0; 
             width: 100%; 
         }
+        
         [data-testid="column"]:not(:first-child) { 
             margin-left: 0; 
             width: 100%; 
         }
+        
         .severity-bar { 
             flex-direction: column; 
             text-align: center; 
         }
+        
         .main-header {
             font-size: 2rem;
         }
@@ -499,7 +597,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'gd-1',
                 'title': 'Unauthorized IAM User Access',
                 'severity': 'HIGH',
-                'description': 'API was invoked from an IP address not observed in the last 30 days.',
+                'description': 'API was invoked from an IP address not observed in the last 30 days. This indicates potential unauthorized access to AWS resources.',
                 'resource': 'arn:aws:iam::123456789012:user/suspicious-user',
                 'service': 'GuardDuty',
                 'type': 'Recon:EC2/Portscan',
@@ -510,7 +608,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'gd-2',
                 'title': 'Bitcoin Mining Activity Detected',
                 'severity': 'HIGH',
-                'description': 'EC2 instance is communicating with IP addresses known for Bitcoin mining activity.',
+                'description': 'EC2 instance is communicating with IP addresses known for Bitcoin mining activity. This indicates potential cryptocurrency mining malware.',
                 'resource': 'i-abcdef12345678901',
                 'service': 'GuardDuty',
                 'type': 'CryptoCurrency:EC2/BitcoinTool.B',
@@ -521,7 +619,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'gd-3',
                 'title': 'Suspicious API Call from Tor Exit Node',
                 'severity': 'MEDIUM',
-                'description': 'API call from a Tor exit node IP address detected.',
+                'description': 'API call from a Tor exit node IP address detected. This may indicate attempts to hide the source of malicious activity.',
                 'resource': 'arn:aws:iam::123456789012:role/WebServerRole',
                 'service': 'GuardDuty',
                 'type': 'UnauthorizedAccess:IAMUser/TorIPCaller',
@@ -531,7 +629,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
         ]
         
         return sample_findings
-    
+
     def _generate_security_hub_findings(self):
         """Generate sample Security Hub findings"""
         findings = []
@@ -541,7 +639,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'sh-1',
                 'title': 'S3 Bucket Public Read Access',
                 'severity': 'HIGH',
-                'description': 'S3 bucket policy allows public read access.',
+                'description': 'S3 bucket policy allows public read access, potentially exposing sensitive customer data to unauthorized users.',
                 'resource': 'arn:aws:s3:::customer-data-bucket',
                 'service': 'Security Hub',
                 'type': 'Software and Configuration Checks',
@@ -552,7 +650,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'sh-2',
                 'title': 'Security Group Allows All Traffic',
                 'severity': 'CRITICAL',
-                'description': 'Security group allows inbound traffic on all ports from any IP address.',
+                'description': 'Security group allows inbound traffic on all ports from any IP address, creating significant security risk.',
                 'resource': 'sg-abcdef12',
                 'service': 'Security Hub',
                 'type': 'Software and Configuration Checks',
@@ -563,7 +661,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'sh-3',
                 'title': 'IAM Password Policy Weak',
                 'severity': 'MEDIUM',
-                'description': 'IAM password policy does not meet minimum requirements.',
+                'description': 'IAM password policy does not meet minimum requirements for complexity and rotation.',
                 'resource': 'aws-account',
                 'service': 'Security Hub',
                 'type': 'Software and Configuration Checks',
@@ -583,7 +681,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'prisma-1',
                 'title': 'Container Running as Root',
                 'severity': 'HIGH',
-                'description': 'Container is running with root privileges, increasing attack surface.',
+                'description': 'Container is running with root privileges, increasing attack surface and potential impact of container escape.',
                 'resource': 'k8s-pod/production/app-server',
                 'service': 'Prisma Cloud',
                 'type': 'Container Security',
@@ -594,7 +692,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'prisma-2',
                 'title': 'Public Cloud Storage with Sensitive Data',
                 'severity': 'CRITICAL',
-                'description': 'Cloud storage bucket contains sensitive data and is publicly accessible.',
+                'description': 'Cloud storage bucket contains sensitive data and is publicly accessible, risking data exposure.',
                 'resource': 'gcs://sensitive-data-bucket',
                 'service': 'Prisma Cloud',
                 'type': 'Data Security',
@@ -605,7 +703,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'prisma-3',
                 'title': 'Network Security Group Allows RDP from Internet',
                 'severity': 'HIGH',
-                'description': 'Azure NSG allows RDP access from any IP address.',
+                'description': 'Azure NSG allows RDP access from any IP address, enabling potential brute force attacks.',
                 'resource': '/subscriptions/123/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/app-nsg',
                 'service': 'Prisma Cloud',
                 'type': 'Network Security',
@@ -625,7 +723,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'wiz-1',
                 'title': 'Critical Vulnerability in Web Application',
                 'severity': 'CRITICAL',
-                'description': 'Remote code execution vulnerability in web application framework.',
+                'description': 'Remote code execution vulnerability in web application framework allowing attackers to execute arbitrary code.',
                 'resource': 'arn:aws:ecs:us-east-1:123456789012:task/production/web-app',
                 'service': 'Wiz',
                 'type': 'Vulnerability Management',
@@ -636,7 +734,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'wiz-2',
                 'title': 'Misconfigured Kubernetes Cluster',
                 'severity': 'HIGH',
-                'description': 'Kubernetes cluster allows anonymous access to API server.',
+                'description': 'Kubernetes cluster allows anonymous access to API server, enabling unauthorized cluster access.',
                 'resource': 'gke-cluster/production',
                 'service': 'Wiz',
                 'type': 'Kubernetes Security',
@@ -647,7 +745,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'wiz-3',
                 'title': 'Exposed Database Credentials',
                 'severity': 'HIGH',
-                'description': 'Database connection string exposed in environment variables.',
+                'description': 'Database connection string exposed in environment variables, risking credential theft.',
                 'resource': 'azure-app-service/production/api',
                 'service': 'Wiz',
                 'type': 'Secrets Management',
@@ -667,7 +765,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'qualys-1',
                 'title': 'SSL/TLS Vulnerability - POODLE',
                 'severity': 'MEDIUM',
-                'description': 'SSL 3.0 vulnerability allowing padding oracle attacks.',
+                'description': 'SSL 3.0 vulnerability allowing padding oracle attacks that could expose encrypted data.',
                 'resource': 'web-server-01.company.com',
                 'service': 'Qualys',
                 'type': 'Vulnerability Scan',
@@ -678,7 +776,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'qualys-2',
                 'title': 'Apache Struts Remote Code Execution',
                 'severity': 'CRITICAL',
-                'description': 'Apache Struts vulnerability allowing remote code execution.',
+                'description': 'Apache Struts vulnerability allowing remote code execution through crafted requests.',
                 'resource': 'app-server-02.company.com',
                 'service': 'Qualys',
                 'type': 'Vulnerability Scan',
@@ -689,7 +787,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'qualys-3',
                 'title': 'Windows SMB Vulnerability',
                 'severity': 'HIGH',
-                'description': 'SMBv1 vulnerability allowing remote code execution.',
+                'description': 'SMBv1 vulnerability allowing remote code execution through network attacks.',
                 'resource': 'fileserver-01.company.com',
                 'service': 'Qualys',
                 'type': 'Vulnerability Scan',
@@ -709,7 +807,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'cortex-1',
                 'title': 'Malware Detected - Emotet',
                 'severity': 'CRITICAL',
-                'description': 'Emotet malware detected on endpoint through behavioral analysis.',
+                'description': 'Emotet malware detected on endpoint through behavioral analysis, indicating system compromise.',
                 'resource': 'workstation-user-01.company.com',
                 'service': 'Cortex XDR',
                 'type': 'Malware Protection',
@@ -720,7 +818,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'cortex-2',
                 'title': 'Suspicious PowerShell Activity',
                 'severity': 'HIGH',
-                'description': 'PowerShell script with obfuscation and suspicious commands detected.',
+                'description': 'PowerShell script with obfuscation and suspicious commands detected, indicating potential attack.',
                 'resource': 'server-db-01.company.com',
                 'service': 'Cortex XDR',
                 'type': 'Behavioral Threat Protection',
@@ -731,7 +829,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                 'id': 'cortex-3',
                 'title': 'Lateral Movement Detected',
                 'severity': 'HIGH',
-                'description': 'Suspicious RDP connection from compromised host.',
+                'description': 'Suspicious RDP connection from compromised host, indicating lateral movement attempt.',
                 'resource': 'workstation-admin-02.company.com',
                 'service': 'Cortex XDR',
                 'type': 'Network Threat Protection',
@@ -1145,8 +1243,8 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
         with col1:
             st.markdown("""
             <div style='text-align: center; padding: 20px;'>
-                <h2 style='color: #e2e8f0; margin-bottom: 10px;'>🔍 Unified Cloud Security</h2>
-                <p style='color: #b0b0b0; font-size: 1.1rem;'>Multi-tool security monitoring and AI-powered remediation across AWS, Azure, and GCP</p>
+                <h2 style='color: #1a1a1a; margin-bottom: 10px;'>🔍 Unified Cloud Security</h2>
+                <p style='color: #495057; font-size: 1.1rem;'>Multi-tool security monitoring and AI-powered remediation across AWS, Azure, and GCP</p>
             </div>
             """, unsafe_allow_html=True)
             
@@ -1164,7 +1262,7 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                             st.markdown(f"""
                             <div class="tool-card">
                                 <h4>{tool}</h4>
-                                <div style='font-size: 0.8rem; color: #b0b0b0;'>
+                                <div style='font-size: 0.8rem; color: #495057;'>
                                     {status_icon} {status.upper()}
                                 </div>
                             </div>
@@ -1174,22 +1272,22 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
             # Cloud coverage
             st.markdown("""
             <div class="ai-insight">
-                <h3 style='color: #e2e8f0; margin-bottom: 15px;'>☁️ Multi-Cloud Coverage</h3>
+                <h3 style='color: #0c5460; margin-bottom: 15px;'>☁️ Multi-Cloud Coverage</h3>
                 <div style='display: flex; align-items: center; margin: 10px 0;'>
                     <span style='font-size: 1.5rem; margin-right: 10px;'>🅰️</span>
-                    <span style='color: #e2e8f0;'>AWS - Full Coverage</span>
+                    <span style='color: #0c5460;'>AWS - Full Coverage</span>
                 </div>
                 <div style='display: flex; align-items: center; margin: 10px 0;'>
                     <span style='font-size: 1.5rem; margin-right: 10px;'>Ⓜ️</span>
-                    <span style='color: #e2e8f0;'>Azure - Partial Coverage</span>
+                    <span style='color: #0c5460;'>Azure - Partial Coverage</span>
                 </div>
                 <div style='display: flex; align-items: center; margin: 10px 0;'>
                     <span style='font-size: 1.5rem; margin-right: 10px;'>Ⓖ</span>
-                    <span style='color: #e2e8f0;'>GCP - Partial Coverage</span>
+                    <span style='color: #0c5460;'>GCP - Partial Coverage</span>
                 </div>
                 <div style='display: flex; align-items: center; margin: 10px 0;'>
                     <span style='font-size: 1.5rem; margin-right: 10px;'>🖥️</span>
-                    <span style='color: #e2e8f0;'>On-prem - Basic Coverage</span>
+                    <span style='color: #0c5460;'>On-prem - Basic Coverage</span>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -1197,8 +1295,8 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
             # AI Models
             st.markdown("""
             <div class="security-tip">
-                <h4 style='color: #e2e8f0;'>🤖 AI-Powered Remediation</h4>
-                <p style='color: #e2e8f0;'>Powered by AWS Bedrock with multiple AI models for intelligent security analysis and automated remediation.</p>
+                <h4 style='color: #155724;'>🤖 AI-Powered Remediation</h4>
+                <p style='color: #155724;'>Powered by AWS Bedrock with multiple AI models for intelligent security analysis and automated remediation.</p>
             </div>
             """, unsafe_allow_html=True)
             
@@ -1370,119 +1468,143 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
             st.plotly_chart(fig, use_container_width=True)
 
     def _display_findings_tab(self, vulnerabilities):
-        """Display findings from all tools"""
-        st.header("🚨 Unified Security Findings")
-        
+        """Display vulnerabilities in findings tab"""
         if not vulnerabilities:
-            st.success("🎉 No security findings detected across all tools!")
+            st.info("No vulnerabilities found for the selected criteria.")
             return
         
-        # Enhanced filters
-        col1, col2, col3, col4 = st.columns([2, 2, 1, 1])
-        
+        # Add filters - with safe key access
+        col1, col2, col3 = st.columns(3)
         with col1:
-            # Tool filter
-            tools = list(set([v.get('service', 'Unknown') for v in vulnerabilities]))
-            selected_tools = st.multiselect(
-                "Filter by Tool:",
-                tools,
-                default=tools
+            severity_filter = st.multiselect(
+                "Filter by Severity",
+                options=['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'],
+                default=['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']
             )
         
         with col2:
-            # Severity filter
-            severities = list(set([v['severity'] for v in vulnerabilities]))
-            selected_severities = st.multiselect(
-                "Filter by Severity:",
-                severities,
-                default=severities
+            # Safely get service options
+            service_options = sorted(list(set(
+                vuln.get('service', 'Unknown') for vuln in vulnerabilities
+            )))
+            service_filter = st.multiselect(
+                "Filter by Service",
+                options=service_options,
+                default=[]
             )
         
         with col3:
-            # Cloud filter
-            clouds = ['AWS', 'Azure', 'GCP', 'On-prem', 'Other']
-            selected_clouds = st.multiselect(
-                "Filter by Cloud:",
-                clouds,
-                default=clouds
+            # Safely get category options
+            category_options = sorted(list(set(
+                vuln.get('category', 'Uncategorized') for vuln in vulnerabilities
+            )))
+            category_filter = st.multiselect(
+                "Filter by Category",
+                options=category_options,
+                default=[]
             )
         
-        with col4:
-            search_term = st.text_input("Search:", placeholder="Title, description...")
+        # Filter vulnerabilities with safe key access
+        filtered_vulns = [
+            vuln for vuln in vulnerabilities
+            if vuln.get('severity', 'UNKNOWN') in severity_filter
+            and (not service_filter or vuln.get('service', 'Unknown') in service_filter)
+            and (not category_filter or vuln.get('category', 'Uncategorized') in category_filter)
+        ]
         
-        # Apply filters
-        filtered_vulns = [v for v in vulnerabilities 
-                         if v.get('service', 'Unknown') in selected_tools
-                         and v['severity'] in selected_severities
-                         and (not search_term or search_term.lower() in v['title'].lower() or search_term.lower() in v.get('description', '').lower())]
+        st.write(f"**Showing {len(filtered_vulns)} of {len(vulnerabilities)} vulnerabilities**")
         
-        # Additional cloud filtering
-        cloud_mapping = self._get_cloud_distribution([v for v in filtered_vulns])
-        filtered_vulns = [v for v in filtered_vulns if any(cloud in cloud_mapping for cloud in selected_clouds)]
-        
-        st.write(f"**Showing {len(filtered_vulns)} of {len(vulnerabilities)} findings**")
-        
+        # Display vulnerability cards
         for idx, vuln in enumerate(filtered_vulns):
             self._display_finding_card(vuln, idx)
-    
+
     def _display_finding_card(self, vuln, idx):
-        """Display individual finding card"""
+        """Display individual finding card with proper contrast"""
         border_color = {
-            'CRITICAL': '#e53e3e',
-            'HIGH': '#dd6b20', 
-            'MEDIUM': '#d69e2e',
-            'LOW': '#38a169'
-        }.get(vuln['severity'], '#666')
+            'CRITICAL': '#ff4757',
+            'HIGH': '#ff6b6b', 
+            'MEDIUM': '#ffa502',
+            'LOW': '#2ed573'
+        }.get(vuln.get('severity', 'MEDIUM'), '#666')
         
-        tool_icons = {
-            'GuardDuty': '🛡️',
-            'Security Hub': '🔒',
-            'Prisma Cloud': '☁️',
-            'Wiz': '🔍',
-            'Qualys': '📊',
-            'Cortex XDR': '🖥️'
-        }
+        severity_bg_color = {
+            'CRITICAL': '#ff4757',
+            'HIGH': '#ff6b6b',
+            'MEDIUM': '#ffa502', 
+            'LOW': '#2ed573'
+        }.get(vuln.get('severity', 'MEDIUM'), '#666')
         
-        tool_icon = tool_icons.get(vuln.get('service', ''), '🔧')
-        
+        severity_text_color = {
+            'CRITICAL': '#ffffff',
+            'HIGH': '#ffffff',
+            'MEDIUM': '#000000',
+            'LOW': '#000000'
+        }.get(vuln.get('severity', 'MEDIUM'), '#ffffff')
+
+        # Start with the main card container
         st.markdown(f"""
-        <div class="vulnerability-card" style="border-left-color: {border_color};">
+        <div class="vulnerability-card" style="border-left-color: {border_color}; background: #ffffff; border-left-width: 4px; border-left-style: solid; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="display: flex; justify-content: between; align-items: start;">
                 <div style="flex: 1;">
-                    <h3 style="margin: 0 0 10px 0; color: #e2e8f0; font-weight: 600;">{vuln['title']}</h3>
+                    <h3 style="margin: 0 0 10px 0; color: #1a1a1a; font-weight: 600;">{vuln.get('title', 'No Title')}</h3>
                     <div style="display: flex; gap: 15px; margin-bottom: 10px; flex-wrap: wrap;">
-                        <span class="severity-{vuln['severity'].lower()}" style="background: {border_color}; color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; font-weight: bold;">
-                            {vuln['severity']}
+                        <span style="background: {severity_bg_color}; color: {severity_text_color}; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; font-weight: bold;">
+                            {vuln.get('severity', 'UNKNOWN')}
                         </span>
-                        <span style="background: #4a5568; color: #e2e8f0; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; border: 1px solid #718096;">
-                            {tool_icon} {vuln.get('service', 'Unknown Tool')}
+                        <span style="background: #f8f9fa; color: #495057; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; border: 1px solid #dee2e6;">
+                            {vuln.get('service', 'Unknown')} - {vuln.get('resource_name', 'Unknown Resource')}
                         </span>
-                        <span style="background: #744210; color: #e2e8f0; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; border: 1px solid #d69e2e;">
-                            ⏱️ {vuln.get('created', 'Recently').split('T')[0]}
+                        <span style="background: #fff3cd; color: #856404; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; border: 1px solid #ffeaa7;">
+                            ⏱️ {vuln.get('detection_time', 'Recently')}
                         </span>
                     </div>
                 </div>
             </div>
-            
+        """, unsafe_allow_html=True)
+        
+        # Description section
+        st.markdown(f"""
             <div style="margin: 15px 0;">
-                <p style="margin: 0; color: #e2e8f0; line-height: 1.5; background: #4a5568; padding: 12px; border-radius: 6px;">{vuln['description']}</p>
+                <p style="margin: 0; color: #4a4a4a; line-height: 1.5; background: #f8f9fa; padding: 12px; border-radius: 6px;">{vuln.get('description', 'No description available.')}</p>
             </div>
-            
+        """, unsafe_allow_html=True)
+        
+        # Remediation and Category section
+        st.markdown(f"""
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0;">
-                <div style="background: #4a5568; padding: 12px; border-radius: 6px;">
-                    <strong style="color: #e2e8f0;">🎯 Resource:</strong>
-                    <p style="margin: 5px 0; color: #e2e8f0; word-break: break-all;">{vuln.get('resource', 'N/A')}</p>
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 6px;">
+                    <strong style="color: #1a1a1a;">🔄 Remediation:</strong>
+                    <p style="margin: 5px 0; color: #155724; background: #d4edda; padding: 8px; border-radius: 4px; border-left: 3px solid #28a745;">{vuln.get('remediation', 'No remediation guidance available.')}</p>
                 </div>
-                <div style="background: #4a5568; padding: 12px; border-radius: 6px;">
-                    <strong style="color: #e2e8f0;">📋 Type:</strong>
-                    <p style="margin: 5px 0; color: #e2e8f0;">{vuln.get('type', 'N/A')}</p>
-                    <strong style="color: #e2e8f0;">🆔 ID:</strong>
-                    <p style="margin: 5px 0; color: #e2e8f0; font-family: monospace;">{vuln['id']}</p>
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 6px;">
+                    <strong style="color: #1a1a1a;">📋 Category:</strong>
+                    <p style="margin: 5px 0; color: #495057;">{vuln.get('category', 'Uncategorized')}</p>
+                    <strong style="color: #1a1a1a;">🎯 Exploitability:</strong>
+                    <p style="margin: 5px 0; color: #495057;">{vuln.get('exploitability', 'Medium')}</p>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        # Risk Score and Compliance section
+        st.markdown(f"""
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 6px;">
+                    <strong style="color: #1a1a1a;">🎯 Risk Score:</strong>
+                    <div style="background: #e9ecef; border-radius: 10px; height: 8px; margin: 8px 0;">
+                        <div style="width: {vuln.get('risk_score', 50)}%; background: {border_color}; height: 100%; border-radius: 10px;"></div>
+                    </div>
+                    <small style="color: #495057;">{vuln.get('risk_score', 50)}/100</small>
+                </div>
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 6px;">
+                    <strong style="color: #1a1a1a;">📊 Compliance:</strong>
+                    <p style="margin: 5px 0; font-size: 0.9rem; color: #495057;">
+                        {', '.join(vuln.get('compliance_standards', ['N/A']))}
+                    </p>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
-        
+                
         # Action buttons
         col1, col2, col3 = st.columns([2, 1, 1])
         with col1:
@@ -1610,9 +1732,9 @@ aws iam attach-role-policy --role-name suspicious-role --policy-arn arn:aws:iam:
                         }.get(vuln['severity'], '#666')
                         
                         st.markdown(f"""
-                        <div style="border-left: 4px solid {border_color}; padding: 10px; margin: 5px 0; background: #4a5568; border-radius: 5px;">
-                            <strong style="color: #e2e8f0;">{vuln['title']}</strong> - <span class="{severity_class}">{vuln['severity']}</span><br>
-                            <small style="color: #e2e8f0;">{vuln['description']}</small>
+                        <div style="border-left: 4px solid {border_color}; padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 5px;">
+                            <strong style="color: #1a1a1a;">{vuln['title']}</strong> - <span class="{severity_class}">{vuln['severity']}</span><br>
+                            <small style="color: #495057;">{vuln['description']}</small>
                         </div>
                         """, unsafe_allow_html=True)
                 else:
