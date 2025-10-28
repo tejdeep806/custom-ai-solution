@@ -115,7 +115,7 @@ st.markdown("""
     /* Main header styling */
     .main-header {
         font-size: 2.8rem;
-        color: #1a1a1a !important;
+        color: #CCCCCC !important;
         text-align: center;
         margin-bottom: 1rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
